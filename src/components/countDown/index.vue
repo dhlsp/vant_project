@@ -1,0 +1,60 @@
+<template>
+  <div class="CountDown">
+    <span>{{minute}}秒后获取</span>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'countDown',
+  props: {
+    countTime: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      minute: 60,
+    };
+  },
+  watch: {
+    countTime: {
+      handler(val) {
+        this.minutes = val;
+      },
+      deep: true,
+      immediate: true,
+    },
+    'minutes': {
+      handler(newVal) {
+        if (newVal >= 0) {
+          // this.minute = newVal;
+          this.add(newVal);
+        }
+      },
+    },
+  },
+  created() {
+    // this.minute = this.countTime;
+    this.add(this.countTime);
+  },
+  methods: {
+    add(num) {
+      let time = window.setInterval(() => {
+        if (num !== 0 && num > 0) {
+          this.minute = this.minutes;
+          this.minutes -= 1;
+          if (this.minutes < 0) {
+            this.$emit('countdownend');
+            window.clearInterval(time);
+          }
+        } else if (num === 0) {
+          this.$emit('countdownend');
+          window.clearInterval(time);
+        }
+      }, 1000);
+    },
+  },
+};
+</script>

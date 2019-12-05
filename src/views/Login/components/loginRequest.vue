@@ -21,7 +21,7 @@
           <router-link to="">忘记密码</router-link>
         </div>
 			</div>
-      <van-button type="info" size="large">登录</van-button>
+      <van-button type="info" size="large" @click="submit">登录</van-button>
     </van-cell-group>
 
     <div class="register clearfix">
@@ -29,13 +29,19 @@
 				<span @click="showKefu = true">联系客服</span>
 			</div>
 			<div class="float-r">
-        <router-link to="">免费注册</router-link>
+        <router-link to="/register">免费注册</router-link>
       </div>
 		</div>
+
+    <van-popup v-model="showKefu">
+			<contact-service mobile="18024179009"></contact-service>
+		</van-popup>
   </div>
 </template>
 
 <script>
+import contactService from '@/components/contactService';
+
 export default {
   name: 'loginRequest',
   data() {
@@ -46,6 +52,15 @@ export default {
       showKefu: false,
       isLogining: false,
     };
+  },
+  methods: {
+    submit() {
+      console.log('this.account', this.account);
+      console.log('this.password', this.password);
+    },
+  },
+  components: {
+    contactService,
   },
 };
 </script>
