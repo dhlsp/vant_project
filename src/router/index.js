@@ -34,7 +34,7 @@ const routes = [
     component: () => import('../views/Register/components/registerSubmit'),
   },
   {
-    path: '/register/status',
+    path: '/register/registerStatus/:status',
     name: 'registerStatus',
     props: true,
     component: () => import('../views/Register/components/registerStatus'),

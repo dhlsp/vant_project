@@ -1,6 +1,6 @@
 <template>
   <div class="CountDown">
-    <span>{{minute}}秒后获取</span>
+    <span>{{minute}}秒{{countText}}</span>
   </div>
 </template>
 
@@ -12,6 +12,10 @@ export default {
       type: Number,
       required: true,
     },
+    countText: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -19,6 +23,11 @@ export default {
     };
   },
   watch: {
+    countText: {
+      handler(val) {
+        console.log('val', val);
+      },
+    },
     countTime: {
       handler(val) {
         this.minutes = val;
@@ -36,7 +45,7 @@ export default {
     },
   },
   created() {
-    // this.minute = this.countTime;
+    this.minute = this.countTime;
     this.add(this.countTime);
   },
   methods: {
@@ -58,3 +67,11 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.CountDown {
+  // 并列
+  display: inline;
+  color: red;
+}
+</style>

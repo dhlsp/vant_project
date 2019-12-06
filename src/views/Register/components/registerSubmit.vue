@@ -9,7 +9,7 @@
             <template slot-scope="props">{{ +props.seconds || 60 }}秒后获取</template>
           </CountDown> -->
           <span v-if="counting">
-            <CountDown :countTime="countTime" @countdownend="countdownend"></CountDown>
+            <CountDown :countTime="countTime" countText="后获取" @countdownend="countdownend"></CountDown>
           </span>
           <span v-else>获取验证码</span>
         </div>
@@ -55,11 +55,11 @@ export default {
       this.counting = false;
     },
     registerSubmit() {
-      // this.$router.push({
-      //   name: '/register/status',
-      //   params: { status: 'success' },
-      // });
-      this.$router.push('/register/status');
+      this.$router.push({
+        name: 'registerStatus',
+        params: { status: 'success' },
+      });
+      // this.$router.push('/register/status');
     },
   },
   components: {

@@ -5,11 +5,14 @@
 			<div>{{statusText}}</div>
 		</div>
 
-		<div class="status_text"><span class="red">3秒</span>后返回到登录页, 您也可以<router-link to="/login" class="red">点此登录</router-link></div>
+		<!-- <div class="status_text"><span class="red">3秒</span>后返回到登录页, 您也可以<router-link to="/login" class="red">点此登录</router-link></div> -->
+    <div class="status_text"><CountDown :countTime="5" @countdownend="countdownend"></CountDown>后返回到登录页, 您也可以<router-link to="/login" class="red">点此登录</router-link></div>
 	</div>
 </template>
 
 <script>
+import CountDown from '@/components/countDown';
+
 export default {
   name: 'registerStatus',
   props: {
@@ -19,6 +22,11 @@ export default {
     return {
       isSuccess: true,
     };
+  },
+  methods: {
+    countdownend() {
+      this.$router.push('/login');
+    },
   },
   computed: {
     statusText() {
@@ -33,6 +41,9 @@ export default {
   },
   activated() {
     this.isSuccess = this.status === 'success';
+  },
+  components: {
+    CountDown,
   },
 };
 </script>
@@ -58,20 +69,23 @@ export default {
 
 .status_text {
   // color: $font-color-gray;
+  color: #999;
   margin-bottom: 50px;
 }
-
+.red {
+  color: red;
+}
 .status_icon {
   font-size: 80px;
 }
 
 i.success_icon {
-  // @extend .status_icon;
+  @extend .status_icon;
   color: #06bf04;
 }
 
 i.fail_icon {
-  // @extend .status_icon;
+  @extend .status_icon;
   color: #f44;
 }
 </style>
