@@ -23,6 +23,23 @@ const routes = [
     name: 'login',
     component: () => import('../views/Login'),
   },
+  // 忘记密码
+  {
+    path: '/forget',
+    name: 'forget',
+    component: () => import('../views/Forget'),
+  },
+  {
+    path: '/forget/reset',
+    name: 'forgetReset',
+    component: () => import('../views/Forget/components/forgetReset'),
+  },
+  {
+    path: '/forget/status',
+    name: 'forgetStatus',
+    component: () => import('../views/Forget/components/forgetStatus'),
+  },
+  // 注册
   {
     path: '/register',
     name: 'register',

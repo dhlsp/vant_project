@@ -49,7 +49,6 @@ export default {
   methods: {
     getCode() {
       this.counting = true;
-      console.log('5555');
     },
     countdownend() {
       this.counting = false;
