@@ -1,8 +1,14 @@
 <template>
   <div>
+    <van-nav-bar
+      title="修改密码"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+    ></van-nav-bar>
     <van-cell-group class="register_view field_group">
-      <van-field :style="borderRed" v-model="password" placeholder="请输入密码" left-icon="contact" :is-error="isErrow" clearable/>
-      <van-field :style="borderRed" v-model="submitPassword" placeholder="请再次确认密码" left-icon="contact" :is-error="isErrow" clearable/>
+      <van-field :style="borderRed" v-model="password" placeholder="请输入密码" left-icon="lock" :is-error="isErrow" clearable/>
+      <van-field :style="borderRed" v-model="submitPassword" placeholder="请再次确认密码" left-icon="lock" :is-error="isErrow" clearable/>
       <div class="red" v-show="isErrow">两次密码输入不一致</div>
       <div class="register_submit_btn">
         <van-button style="margin-right: 10px;" size="large" @click="reset">重置</van-button>
@@ -42,6 +48,9 @@ export default {
     },
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     reset() {
       this.password = '';
       this.submitPassword = '';

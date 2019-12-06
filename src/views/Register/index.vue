@@ -1,11 +1,17 @@
 <template>
   <div>
+    <van-nav-bar
+      title="注册"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+    ></van-nav-bar>
     <van-cell-group class="register_view">
       <div class="text-div">我们将发送验证码到您的手机</div>
       <van-field
         v-model="mobile"
         placeholder="请输入手机号"
-        left-icon="phone"
+        left-icon="mobile"
         clearable
       />
       <div class="register_submit">
@@ -29,6 +35,9 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     submitCode() {
       this.$router.push('/register/submit');
     },

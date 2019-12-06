@@ -1,13 +1,19 @@
 <template>
   <div>
+    <van-nav-bar
+      title="修改密码"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+    ></van-nav-bar>
     <van-cell-group class="register_view field_group">
       <van-field
         v-model="mobile"
         placeholder="请输入手机号"
-        left-icon="phone"
+        left-icon="mobile"
         clearable
       />
-      <van-field v-model="code" placeholder="请输入验证码" left-icon="contact" clearable>
+      <van-field v-model="code" placeholder="请输入验证码" left-icon="lock" clearable>
         <div slot="button" @click="getCode" class="getCode time_down">
           <span v-if="counting">
             <CountDown :countTime="60" countText="后获取" @countdownend="countdownend"></CountDown>
@@ -35,6 +41,9 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     submitCode() {
       this.$router.push('/forget/reset');
     },

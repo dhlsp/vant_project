@@ -4,16 +4,16 @@
       <van-field
         v-model="account"
         placeholder="随便输"
-        left-icon="contact"
+        left-icon="username"
         clearable
       />
 
       <van-field
         v-model="password"
         placeholder="随便输"
-        left-icon="setting-o"
+        left-icon="lock"
         :type="visiblePass ? 'text' : 'password'"
-        :right-icon="visiblePass ? 'eye-o' : 'closed-eye'"
+        :right-icon="visiblePass ? 'eye-open' : 'eye-close'"
         @click-right-icon="visiblePass = !visiblePass"
       />
       <div class="clearfix">

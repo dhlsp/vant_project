@@ -1,8 +1,14 @@
 <template>
   <div>
+    <van-nav-bar
+      title="注册"
+      left-text="返回"
+      left-arrow
+      @click-left="onClickLeft"
+    ></van-nav-bar>
     <!-- <CountDown :countTime="countTime"></CountDown> -->
     <van-cell-group class="register_submit field_group">
-      <van-field v-model="code" placeholder="请输入验证码" left-icon="contact" clearable>
+      <van-field v-model="code" placeholder="请输入验证码" left-icon="mobile" clearable>
         <!-- <van-button slot="button" size="small">发送验证码</van-button> -->
         <div slot="button" @click="getCode" class="getCode time_down">
           <!-- <CountDown v-if="counting" :countTime="countTime" @countdownend="countdownend">
@@ -22,8 +28,8 @@
       >
         <van-button slot="button" size="small" type="primary">发送验证码</van-button>
       </van-field> -->
-      <van-field v-model="password" placeholder="请输入密码" left-icon="contact" clearable/>
-      <van-field v-model="repeatPassword" placeholder="请再次确认密码" left-icon="contact" clearable/>
+      <van-field v-model="password" placeholder="请输入密码" left-icon="lock" clearable/>
+      <van-field v-model="repeatPassword" placeholder="请再次确认密码" left-icon="lock" clearable/>
 
       <div class="register_submit_btn">
         <van-button type="info" size="large" @click="registerSubmit">确定</van-button>
@@ -47,6 +53,9 @@ export default {
     };
   },
   methods: {
+    onClickLeft() {
+      this.$router.go(-1);
+    },
     getCode() {
       this.counting = true;
     },
