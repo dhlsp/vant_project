@@ -6,27 +6,22 @@
       left-arrow
       @click-left="onClickLeft"
     ></van-nav-bar>
-    <!-- <CountDown :countTime="countTime"></CountDown> -->
     <van-cell-group class="register_submit field_group">
       <van-field v-model="code" placeholder="请输入验证码" left-icon="mobile" clearable>
-        <!-- <van-button slot="button" size="small">发送验证码</van-button> -->
         <div slot="button" @click="getCode" class="getCode time_down">
-          <!-- <CountDown v-if="counting" :countTime="countTime" @countdownend="countdownend">
-            <template slot-scope="props">{{ +props.seconds || 60 }}秒后获取</template>
-          </CountDown> -->
           <span v-if="counting">
             <CountDown :countTime="countTime" countText="后获取" @countdownend="countdownend"></CountDown>
           </span>
           <span v-else>获取验证码</span>
         </div>
       </van-field>
-      <!-- <van-field
-        v-model="code"
-        center
-        clearable
-        placeholder="请输入短信验证码"
-      >
-        <van-button slot="button" size="small" type="primary">发送验证码</van-button>
+      <!-- <van-field v-model="code" placeholder="请输入验证码" left-icon="mobile" clearable>
+        <div slot="button" @click="getCode" class="getCode time_down">
+          <van-count-down v-if="counting" :time="60000" @countdownend="countdownend">
+            <template slot-scope="props">{{ +props.seconds || 60 }}秒后获取</template>
+          </van-count-down>
+          <span v-else>获取验证码</span>
+        </div>
       </van-field> -->
       <van-field v-model="password" placeholder="请输入密码" left-icon="lock" clearable/>
       <van-field v-model="repeatPassword" placeholder="请再次确认密码" left-icon="lock" clearable/>

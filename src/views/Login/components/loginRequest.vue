@@ -53,6 +53,15 @@ export default {
       isLogining: false,
     };
   },
+  watch: {
+    'account': {
+      handler(val) {
+        if (val === '') {
+          this.password = '';
+        }
+      },
+    },
+  },
   methods: {
     submit() {
       console.log('this.account', this.account);
