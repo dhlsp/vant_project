@@ -13,7 +13,11 @@
         placeholder="请输入手机号"
         left-icon="mobile"
         clearable
-      />
+        :style="borderRed"
+        :error="errow"
+        :is-error="isErrow"
+      ></van-field>
+      <div class="red" v-show="isErrow">{{Message}}</div>
       <div class="register_submit">
         <van-button type="info" size="large" @click="submitCode">下一步</van-button>
       </div>
@@ -32,13 +36,49 @@ export default {
   data() {
     return {
       mobile: '',
+      isErrow: false,
+      borderRed: '',
+      errow: false,
+      Message: '',
     };
+  },
+  watch: {
+    'mobile': {
+      handler(val) {
+        if (val !== '') {
+          this.borderRed = '';
+          this.isErrow = false;
+          this.errow = false;
+        } else {
+          this.isErrow = true;
+          this.errow = true;
+          this.borderRed = 'border: 1px solid red;color: red;';
+        }
+      },
+    },
   },
   methods: {
     onClickLeft() {
       this.$router.go(-1);
     },
     submitCode() {
+      const PHONE = /^1[0-9]{10}$/;
+      console.log(this.mobile);
+      console.log('PHONE.test(this.mobile)', PHONE.test(this.mobile));
+      if (this.mobile === '') {
+        this.isErrow = true;
+        this.errow = true;
+        this.borderRed = 'border: 1px solid red;color: red;';
+        this.Message = '请输入手机号';
+        return;
+      }
+      if (!PHONE.test(this.mobile)) {
+        this.isErrow = true;
+        this.errow = true;
+        this.borderRed = 'border: 1px solid red;color: red;';
+        this.Message = '请输入正确的手机号';
+        return;
+      }
       this.$router.push('/register/submit');
     },
   },
@@ -62,11 +102,16 @@ div.register_view {
   padding-top: 30px;
 }
 div.register_submit {
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 20px;
 }
 .register_footer {
   text-align: right;
   color: #999;
+}
+.red {
+  color: red;
+  text-align: left;
+  padding-top: 10px;
 }
 </style>

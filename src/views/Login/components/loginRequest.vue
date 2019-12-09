@@ -18,7 +18,7 @@
       />
       <div class="clearfix">
 				<div class="float-r">
-          <router-link to="/forget">忘记密码</router-link>
+          <router-link to="/forget">忘记密码?</router-link>
         </div>
 			</div>
       <van-button type="info" size="large" @click="submit">登录</van-button>
