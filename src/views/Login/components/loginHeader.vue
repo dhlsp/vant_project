@@ -16,7 +16,7 @@ export default {
 <style lang="scss" scoped>
 .store_header {
   text-align: center;
-  padding: 30px 0;
+  padding: 80px 0 30px;
   .store_avatar img {
     border-radius: 50%;
   }

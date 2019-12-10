@@ -16,8 +16,10 @@
         :style="borderRed"
         :error="errow"
         :is-error="isErrow"
+        @blur="checkMobile"
       ></van-field>
-      <div class="red" v-show="isErrow">{{Message}}</div>
+      <messageError v-show="isErrow" :Message="Message"></messageError>
+      <!-- <div class="red" v-show="isErrow">{{Message}}</div> -->
       <div class="register_submit">
         <van-button type="info" size="large" @click="submitCode">下一步</van-button>
       </div>
@@ -61,22 +63,25 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    submitCode() {
+    checkMobile() {
       const PHONE = /^1[0-9]{10}$/;
-      console.log(this.mobile);
-      console.log('PHONE.test(this.mobile)', PHONE.test(this.mobile));
       if (this.mobile === '') {
         this.isErrow = true;
         this.errow = true;
         this.borderRed = 'border: 1px solid red;color: red;';
         this.Message = '请输入手机号';
-        return;
+        return false;
       }
       if (!PHONE.test(this.mobile)) {
         this.isErrow = true;
         this.errow = true;
         this.borderRed = 'border: 1px solid red;color: red;';
         this.Message = '请输入正确的手机号';
+        return false;
+      }
+    },
+    submitCode() {
+      if (this.checkMobile() === false) {
         return;
       }
       this.$router.push('/register/submit');

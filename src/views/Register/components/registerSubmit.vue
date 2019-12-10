@@ -7,24 +7,23 @@
       @click-left="onClickLeft"
     ></van-nav-bar>
     <van-cell-group class="register_submit field_group">
-      <van-field v-model="code" placeholder="请输入验证码" left-icon="mobile" clearable>
+      <van-field v-model="fieldData.code" placeholder="请输入验证码" left-icon="mobile" clearable>
         <div slot="button" @click="getCode" class="getCode time_down">
           <span v-if="counting">
-            <CountDown :countTime="countTime" countText="后获取" @countdownend="countdownend"></CountDown>
+            <count-down :countTime="countTime" countText="后获取" @countdownend="countdownend"></count-down>
           </span>
           <span v-else>获取验证码</span>
         </div>
       </van-field>
-      <!-- <van-field v-model="code" placeholder="请输入验证码" left-icon="mobile" clearable>
-        <div slot="button" @click="getCode" class="getCode time_down">
-          <van-count-down v-if="counting" :time="60000" @countdownend="countdownend">
-            <template slot-scope="props">{{ +props.seconds || 60 }}秒后获取</template>
-          </van-count-down>
-          <span v-else>获取验证码</span>
-        </div>
-      </van-field> -->
-      <van-field v-model="password" placeholder="请输入密码" left-icon="lock" clearable/>
-      <van-field v-model="repeatPassword" placeholder="请再次确认密码" left-icon="lock" clearable/>
+      <van-field
+        v-model="fieldData.password"
+        :type="visiblePass ? 'text' : 'password'"
+        :right-icon="visiblePass ? 'eye-open' : 'eye-close'"
+        @click-right-icon="visiblePass = !visiblePass"
+        placeholder="请输入密码"
+        left-icon="lock"
+      ></van-field>
+      <van-field v-model="fieldData.repeat_password" placeholder="请再次确认密码" left-icon="lock" type="password"></van-field>
 
       <div class="register_submit_btn">
         <van-button type="info" size="large" @click="registerSubmit">确定</van-button>
@@ -34,17 +33,18 @@
 </template>
 
 <script>
-import CountDown from '@/components/countDown';
-
 export default {
   name: 'registerSubmit',
   data() {
     return {
       countTime: 60,
       counting: true,
-      code: '',
-      password: '',
-      repeatPassword: '',
+      visiblePass: false,
+      fieldData: {
+        code: '',
+        password: '',
+        repeat_password: '',
+      },
     };
   },
   methods: {
@@ -58,15 +58,28 @@ export default {
       this.counting = false;
     },
     registerSubmit() {
+      if (this.fieldData.code === '') {
+        this.$toast('请输入验证码');
+        return;
+      }
+      if (this.fieldData.password === '') {
+        this.$toast('请输入密码');
+        return;
+      }
+      if (this.fieldData.repeat_password === '') {
+        this.$toast('请再次确认密码');
+        return;
+      }
+      if (this.fieldData.password !== this.fieldData.repeat_password) {
+        this.$toast('密码不一致, 请再次确认密码');
+        return;
+      }
       this.$router.push({
         name: 'registerStatus',
         params: { status: 'success' },
       });
       // this.$router.push('/register/status');
     },
-  },
-  components: {
-    CountDown,
   },
 };
 </script>

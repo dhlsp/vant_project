@@ -7,9 +7,16 @@
       @click-left="onClickLeft"
     ></van-nav-bar>
     <van-cell-group class="register_view field_group">
-      <van-field :style="borderRed" v-model="password" placeholder="请输入密码" left-icon="lock" :is-error="isErrow" clearable/>
-      <van-field :style="borderRed" v-model="submitPassword" placeholder="请再次确认密码" left-icon="lock" :is-error="isErrow" clearable/>
-      <div class="red" v-show="isErrow">两次密码输入不一致</div>
+      <van-field
+        v-model="password"
+        placeholder="请输入密码"
+        left-icon="lock"
+        :type="visiblePass ? 'text' : 'password'"
+        :right-icon="visiblePass ? 'eye-open' : 'eye-close'"
+        @click-right-icon="visiblePass = !visiblePass"
+      ></van-field>
+      <van-field v-model="submitPassword" placeholder="请再次确认密码" left-icon="lock" type="password"></van-field>
+      <!-- <div class="red" v-show="isErrow">两次密码输入不一致</div> -->
       <div class="register_submit_btn">
         <van-button style="margin-right: 10px;" size="large" @click="reset">重置</van-button>
         <van-button type="info" size="large" @click="submit">确定</van-button>
@@ -23,29 +30,10 @@ export default {
   name: 'forgetReset',
   data() {
     return {
-      isErrow: false,
       password: '',
       submitPassword: '',
-      borderRed: '',
+      visiblePass: false,
     };
-  },
-  watch: {
-    'password': {
-      handler(val) {
-        if (val === '') {
-          this.borderRed = '';
-          this.isErrow = false;
-        }
-      },
-    },
-    'submitPassword': {
-      handler(val) {
-        if (val === '') {
-          this.borderRed = '';
-          this.isErrow = false;
-        }
-      },
-    },
   },
   methods: {
     onClickLeft() {
@@ -56,9 +44,16 @@ export default {
       this.submitPassword = '';
     },
     submit() {
+      if (this.password === '') {
+        this.$toast('请输入密码');
+        return;
+      }
+      if (this.submitPassword === '') {
+        this.$toast('请再次确认密码');
+        return;
+      }
       if (this.password !== this.submitPassword) {
-        this.isErrow = true;
-        this.borderRed = 'border: 1px solid red';
+        this.$toast('密码不一致, 请再次确认密码');
         return;
       }
       this.$router.push({

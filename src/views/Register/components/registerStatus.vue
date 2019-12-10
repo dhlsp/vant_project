@@ -6,13 +6,11 @@
 		</div>
 
 		<!-- <div class="status_text"><span class="red">3秒</span>后返回到登录页, 您也可以<router-link to="/login" class="red">点此登录</router-link></div> -->
-    <div class="status_text"><CountDown :countTime="5" @countdownend="countdownend"></CountDown>后返回到登录页, 您也可以<router-link to="/login" class="red">点此登录</router-link></div>
+    <div class="status_text"><count-down :countTime="5" @countdownend="countdownend"></count-down>后返回到登录页, 您也可以<router-link to="/login" class="red">点此登录</router-link></div>
 	</div>
 </template>
 
 <script>
-import CountDown from '@/components/countDown';
-
 export default {
   name: 'registerStatus',
   props: {
@@ -41,9 +39,6 @@ export default {
   },
   activated() {
     this.isSuccess = this.status === 'success';
-  },
-  components: {
-    CountDown,
   },
 };
 </script>

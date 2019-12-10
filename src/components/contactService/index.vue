@@ -2,7 +2,7 @@
 	<div class="contact_popup">
 		<div class="contact_box contact_top">
 			<div>微信长按识别店主二维码</div>
-			<div><img src="../../assets/images/qc_code.png" alt="店主二维码"></div>
+			<div><img src="../../assets/images/code.png" alt="店主二维码"></div>
 		</div>
 		<div class="contact_box">
 			<div><van-icon name="phone" /> {{mobile}}</div>
@@ -42,11 +42,11 @@ export default {
     }
   }
   .contact_btn {
-    border: 1px solid #db3d3c;
+    border: 1px solid #1989fa;
     width: 80%;
     margin: 0 auto;
     color: #fff;
-    background-color: #db3d3c;
+    background-color: #1989fa;
     padding: 5px 0;
     border-radius: 3px;
     a {
