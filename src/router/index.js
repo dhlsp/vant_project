@@ -47,6 +47,34 @@ const routes = [
     props: true,
     component: () => import('../views/Register/components/registerStatus'),
   },
+  // 首页
+  {
+    path: '/home',
+    name: 'Home',
+    props: true,
+    component: () => import('../views/Home'),
+  },
+  // 分类
+  {
+    path: '/items',
+    name: 'Items',
+    props: true,
+    component: () => import('../views/Items'),
+  },
+  // 购物车
+  {
+    path: '/order',
+    name: 'Order',
+    props: true,
+    component: () => import('../views/Order'),
+  },
+  // 我的
+  {
+    path: '/user',
+    name: 'User',
+    props: true,
+    component: () => import('../views/User'),
+  },
 ];
 
 const router = new VueRouter({

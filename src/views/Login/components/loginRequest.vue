@@ -66,6 +66,20 @@ export default {
     submit() {
       console.log('this.account', this.account);
       console.log('this.password', this.password);
+      if (this.account === '') {
+        this.$toast('请输入账号');
+        return;
+      }
+      if (this.password === '') {
+        this.$toast('请输入账号');
+        return;
+      }
+      let params = {
+        account: this.account,
+        password: this.password,
+      };
+      this.$store.commit('setUser', params);
+      this.$router.push('/home');
     },
   },
   components: {
