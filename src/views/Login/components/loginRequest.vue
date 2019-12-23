@@ -91,6 +91,7 @@ export default {
 <style lang="scss" scoped>
 .van-cell-group {
   margin: 0px 20px;
+  background-color: transparent;
 }
 .field_group > div {
   margin-bottom: 15px;
@@ -101,9 +102,9 @@ export default {
 }
 .register {
   padding-top: 30px;
-  color: #999;
+  color: #000;
   a {
-    color: #999;
+    color: #000;
   }
   > div {
     width: 50%;
@@ -112,10 +113,10 @@ export default {
   }
   .connect {
     position: relative;
-    text-align: right;
+    text-align: left;
   }
   .float-r {
-    text-align: left;
+    text-align: right;
   }
 }
 

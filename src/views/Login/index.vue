@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
     <login-header></login-header>
     <login-request></login-request>
     <login-footer></login-footer>
@@ -20,3 +20,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.login {
+  // background: aqua;
+  // background-image: linear-gradient(#4cd6ff, #aaffeb, #92fff0);
+  background-image: url('../../assets/images/login.jpg');
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+</style>

@@ -12,16 +12,17 @@
             </div> -->
           </div>
           <div class="header-right">
-            <span class="logo" @click="showOut"></span>
+            <span class="logo" @click="showUser"></span>
           </div>
         </div>
       </div>
-      <div class="avatar-dropdown" v-show="isUser">
+      <out-setting v-show="isUser" @hideSet="hideUser"></out-setting>
+      <!-- <div class="avatar-dropdown" v-show="isUser">
         <ul>
           <li @click="signOut"><div class="user">登出</div></li>
-          <li @click="editPwd"><div class="user">修改密码</div></li>
+          <li @click="openUser"><div class="user">我的信息</div></li>
         </ul>
-      </div>
+      </div> -->
 
       <transition>
         <div v-show="userSettingShow" class="user-setting">
@@ -146,6 +147,7 @@
 </template>
 
 <script>
+import outSetting from './components/outSetting';
 import Tabbar from '@/components/Tabbar';
 
 export default {
@@ -176,16 +178,22 @@ export default {
       this.userSettingShow = false;
     },
     // 右边
-    showOut() {
+    showUser() {
       this.isUser = true;
+    },
+    hideUser() {
+      this.isUser = false;
     },
     signOut() {
       this.$router.push('/login');
     },
-    editPwd() {},
+    openUser() {
+      this.$router.push('/user');
+    },
   },
   components: {
     Tabbar,
+    outSetting,
   },
 };
 </script>
@@ -297,7 +305,7 @@ export default {
         width: 220px;
         height: 100%;
         max-width: 100vw;
-        padding: 30px 0px;
+        padding: 30px 0px 50px;
         background: #fff;
         .setting-header{
           text-align: center;
@@ -319,6 +327,8 @@ export default {
         .menu-list{
           text-align: left;
           padding: 0px 20px 0px 20px;
+          height: 80%;
+          overflow-y: scroll;
           li{
             height: 50px;
             line-height: 50px;
