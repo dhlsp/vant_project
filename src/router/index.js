@@ -75,6 +75,12 @@ const routes = [
     props: true,
     component: () => import('../views/User'),
   },
+  // 修改密码
+  {
+    path: '/edit_password',
+    name: 'EditPassword',
+    component: () => import('../views/EditPassword'),
+  },
 ];
 
 const router = new VueRouter({

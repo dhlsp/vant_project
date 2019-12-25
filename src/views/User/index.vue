@@ -21,7 +21,7 @@
             <p class="icon-start">
               <img src="../../assets/images/user/pwd.svg">
             </p>
-            <div class="list-item-inner border-1px">
+            <div class="list-item-inner border-1px" @click="modifyPassword">
               <div class="list-item-text">账号密码</div>
               <div class="list-item-note">
                 <span class="v-note-text">修改</span>
@@ -122,7 +122,7 @@
         </div>
       </div>
       <div class="logout">
-        <button>退出登录</button>
+        <button @click="outLogin">退出登录</button>
       </div>
     </div>
     <Tabbar></Tabbar>
@@ -139,6 +139,15 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    modifyPassword() {
+      this.$router.push('/edit_password');
+      console.log(5565);
+    },
+    outLogin() {
+      this.$router.push('/');
+    },
   },
 };
 </script>
